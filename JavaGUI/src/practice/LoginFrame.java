@@ -8,17 +8,33 @@ public class LoginFrame extends JFrame {
     private JPasswordField passwordField;
 
     public LoginFrame() {
+    	getContentPane().setFont(new Font("Segoe UI Semilight", Font.PLAIN, 12));
+    	getContentPane().setBackground(new Color(31, 34, 40));
+    	setResizable(false);
         setTitle("Securiti.ai Login");
-        setSize(350, 200);
+        setSize(680, 434);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(new GridLayout(3, 2, 10, 10));
 
-        JLabel usernameLabel = new JLabel("Enter username:");
+        JLabel usernameLabel = new JLabel("Username");
+        usernameLabel.setForeground(new Color(255, 255, 255));
+        usernameLabel.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 12));
+        usernameLabel.setBounds(284, 118, 67, 55);
         usernameField = new JTextField();
-        JLabel passwordLabel = new JLabel("Enter password:");
+        usernameField.setBounds(285, 157, 328, 32);
+        JLabel passwordLabel = new JLabel("Password");
+        passwordLabel.setForeground(new Color(255, 255, 255));
+        passwordLabel.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 12));
+        passwordLabel.setBounds(284, 183, 67, 55);
         passwordField = new JPasswordField();
-        JButton loginButton = new JButton("Login");
+        passwordField.setBounds(285, 222, 328, 32);
+        JButton loginButton = new JButton("LOGIN");
+        loginButton.setForeground(new Color(255, 255, 255));
+        loginButton.setFont(new Font("Bahnschrift", Font.BOLD, 16));
+        loginButton.setBounds(284, 293, 328, 55);
+        loginButton.setBackground(new Color(27, 166, 221));
+        loginButton.setFocusPainted(false);
+        loginButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         loginButton.addActionListener(e -> {
             String username = usernameField.getText().trim();
@@ -62,13 +78,24 @@ public class LoginFrame extends JFrame {
                 JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
+        getContentPane().setLayout(null);
 
-        add(usernameLabel);
-        add(usernameField);
-        add(passwordLabel);
-        add(passwordField);
-        add(new JLabel());  // Empty label for spacing
-        add(loginButton);
+        getContentPane().add(usernameLabel);
+        getContentPane().add(usernameField);
+        getContentPane().add(passwordLabel);
+        getContentPane().add(passwordField);
+        getContentPane().add(loginButton);
+        
+        JLabel lblNewLabel = new JLabel("New label");
+        lblNewLabel.setIcon(new ImageIcon(LoginFrame.class.getResource("/images/securiti.png")));
+        lblNewLabel.setBounds(-162, 57, 436, 352);
+        getContentPane().add(lblNewLabel);
+        
+        JLabel lblNewLabel_1 = new JLabel("securiti");
+        lblNewLabel_1.setBounds(361, 62, 197, 66);
+        getContentPane().add(lblNewLabel_1);
+        lblNewLabel_1.setForeground(new Color(27, 166, 221));
+        lblNewLabel_1.setFont(new Font("Bahnschrift", Font.BOLD, 48));
     }
 
     /**
