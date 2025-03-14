@@ -19,6 +19,7 @@ public class AdminFrame extends JFrame {
     private static ArrayList<String> auditLogs = new ArrayList<>();
 
     public AdminFrame() {
+    	setResizable(false);
         setTitle("Admin Panel");
         setSize(750, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -110,6 +111,16 @@ public class AdminFrame extends JFrame {
         JPanel filterPanel = new JPanel();
         filterPanel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
         filterPanel.setBackground(new Color(31, 34, 40));
+        FlowLayout fl_filterPanel = new FlowLayout(FlowLayout.LEFT, 5, 5);
+        filterPanel.setLayout(fl_filterPanel);
+        
+        JLabel lblNewLabel = new JLabel("      securiti");
+        lblNewLabel.setForeground(new Color(27, 166, 221));
+        lblNewLabel.setFont(new Font("Bahnschrift", Font.BOLD, 16));
+        filterPanel.add(lblNewLabel);
+        
+        JLabel lblNewLabel_1 = new JLabel("         ");
+        filterPanel.add(lblNewLabel_1);
         JLabel label = new JLabel("Search:");
         label.setForeground(new Color(255, 255, 255));
         filterPanel.add(label);

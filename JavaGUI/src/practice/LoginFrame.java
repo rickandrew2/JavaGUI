@@ -8,6 +8,7 @@ public class LoginFrame extends JFrame {
     private JPasswordField passwordField;
 
     public LoginFrame() {
+    	setLocationByPlatform(true);
     	getContentPane().setFont(new Font("Segoe UI Semilight", Font.PLAIN, 12));
     	getContentPane().setBackground(new Color(31, 34, 40));
     	setResizable(false);
@@ -82,22 +83,22 @@ public class LoginFrame extends JFrame {
         getContentPane().add(passwordField);
         getContentPane().add(loginButton);
         
-        JLabel lblNewLabel = new JLabel("New label");
-        lblNewLabel.setIcon(new ImageIcon(LoginFrame.class.getResource("/images/securiti.png")));
-        lblNewLabel.setBounds(-162, 57, 436, 352);
-        getContentPane().add(lblNewLabel);
+        JLabel companyLogo = new JLabel("");
+        companyLogo.setIcon(new ImageIcon(LoginFrame.class.getResource("/images/securiti-gradient.png")));
+        companyLogo.setBounds(-162, 57, 436, 352);
+        getContentPane().add(companyLogo);
         
-        JLabel lblNewLabel_1 = new JLabel("securiti");
-        lblNewLabel_1.setBounds(283, 55, 197, 66);
-        getContentPane().add(lblNewLabel_1);
-        lblNewLabel_1.setForeground(new Color(27, 166, 221));
-        lblNewLabel_1.setFont(new Font("Bahnschrift", Font.BOLD, 48));
+        JLabel companyName = new JLabel("securiti");
+        companyName.setBounds(283, 65, 197, 66);
+        getContentPane().add(companyName);
+        companyName.setForeground(new Color(27, 166, 221));
+        companyName.setFont(new Font("Bahnschrift", Font.BOLD, 48));
         
-        JLabel lblNewLabel_1_1 = new JLabel("Welcome");
-        lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
-        lblNewLabel_1_1.setFont(new Font("Bahnschrift", Font.ITALIC, 16));
-        lblNewLabel_1_1.setBounds(545, 74, 79, 43);
-        getContentPane().add(lblNewLabel_1_1);
+        JLabel welcomeLabel = new JLabel("Welcome");
+        welcomeLabel.setForeground(new Color(255, 255, 255));
+        welcomeLabel.setFont(new Font("Bahnschrift", Font.ITALIC, 16));
+        welcomeLabel.setBounds(538, 84, 79, 43);
+        getContentPane().add(welcomeLabel);
         
         JSeparator separator = new JSeparator();
         separator.setBackground(new Color(43, 46, 68));

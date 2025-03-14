@@ -20,7 +20,7 @@ public class ManagerFrame extends JFrame {
         setSize(750, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
+        getContentPane().setLayout(new BorderLayout());
 
         // Table Columns: ID, Name, Email, Department
         String[] columnNames = {"ID", "Name", "Email", "Department"};
@@ -48,19 +48,46 @@ public class ManagerFrame extends JFrame {
 
         // 📜 "View Audit Logs" Button
         JButton auditLogsButton = new JButton("View Audit Logs");
+        auditLogsButton.setForeground(new Color(255, 255, 255));
+        auditLogsButton.setFont(new Font("Bahnschrift", Font.BOLD, 16));
+        auditLogsButton.setBackground(new Color(27, 166, 221));
+        auditLogsButton.setFocusPainted(false);
+        auditLogsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         auditLogsButton.addActionListener(e -> new AuditLogFrame().setVisible(true));
 
         // 🚪 Logout Button
         logoutButton = new JButton("Logout");
+        logoutButton.setForeground(new Color(255, 255, 255));
+        logoutButton.setBorderPainted(false);
+        logoutButton.setBackground(new Color(165, 42, 42));
         logoutButton.addActionListener(e -> logout());
 
         // 🔧 Panel for Search & Filters
-        JPanel filterPanel = new JPanel();
-        filterPanel.add(new JLabel("Search:"));
+        JPanel filterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        FlowLayout flowLayout = (FlowLayout) filterPanel.getLayout();
+        flowLayout.setAlignOnBaseline(true);
+        filterPanel.setForeground(new Color(255, 255, 255));
+        filterPanel.setBackground(new Color(31, 34, 40));
+        filterPanel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
+        
+        JLabel lblNewLabel = new JLabel("      securiti");
+        lblNewLabel.setForeground(new Color(27, 166, 221));
+        lblNewLabel.setFont(new Font("Bahnschrift", Font.BOLD, 16));
+        filterPanel.add(lblNewLabel);
+        
+        JLabel lblNewLabel_1 = new JLabel("         ");
+        filterPanel.add(lblNewLabel_1);
+        JLabel label_1 = new JLabel("Search:");
+        label_1.setForeground(new Color(255, 255, 255));
+        filterPanel.add(label_1);
         filterPanel.add(searchField);
-        filterPanel.add(new JLabel("Filter by Department:"));
+        JLabel label = new JLabel("Filter by Department:");
+        label.setForeground(new Color(255, 255, 255));
+        filterPanel.add(label);
         filterPanel.add(departmentFilter);
-        filterPanel.add(new JLabel("Sort:"));
+        JLabel label_2 = new JLabel("Sort:");
+        label_2.setForeground(new Color(255, 255, 255));
+        filterPanel.add(label_2);
         filterPanel.add(sortOptions);
 
         // 🔘 Panel for Buttons (Audit Logs + Logout)
@@ -69,9 +96,10 @@ public class ManagerFrame extends JFrame {
         buttonPanel.add(logoutButton);
 
         // 🏗 Add Components
-        add(filterPanel, BorderLayout.NORTH);
-        add(new JScrollPane(employeeTable), BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        getContentPane().add(filterPanel, BorderLayout.NORTH);
+        getContentPane().add(new JScrollPane(employeeTable), BorderLayout.CENTER);
+        getContentPane().add(new JScrollPane(employeeTable), BorderLayout.CENTER);
+        getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
         // 📌 Load Employee List
         refreshEmployeeList();
