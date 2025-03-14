@@ -13,7 +13,7 @@ public class AuditLogFrame extends JFrame {
         setTitle("Audit Logs");
         setSize(700, 300); // Increased frame width
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
+        getContentPane().setLayout(new BorderLayout());
 
         // 🏷 Column names
         String[] columnNames = {"Timestamp", "Action Type", "Description"};
@@ -32,7 +32,9 @@ public class AuditLogFrame extends JFrame {
         updateLogs();
 
         // 📜 Add Table to Scroll Pane
-        add(new JScrollPane(logTable), BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(logTable);
+        scrollPane.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 10));
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
     }
 
 

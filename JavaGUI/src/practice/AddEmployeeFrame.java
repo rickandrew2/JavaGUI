@@ -13,24 +13,42 @@ public class AddEmployeeFrame extends JFrame {
     private AdminFrame adminFrame;
 
     public AddEmployeeFrame(AdminFrame adminFrame) {
+    	getContentPane().setBackground(new Color(31, 34, 40));
         this.adminFrame = adminFrame;
 
         setTitle("Add Employee");
-        setSize(350, 200);
+        setSize(425, 381);
         setLocationRelativeTo(null);
-        setLayout(new GridLayout(4, 2, 10, 10));
 
-        JLabel nameLabel = new JLabel("Name:");
+        JLabel nameLabel = new JLabel("Name");
+        nameLabel.setBounds(109, 26, 106, 33);
+        nameLabel.setForeground(new Color(255, 255, 255));
+        nameLabel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 12));
         nameField = new JTextField();
+        nameField.setBounds(109, 56, 246, 33);
         
-        JLabel emailLabel = new JLabel("Email:");
+        JLabel emailLabel = new JLabel("Email");
+        emailLabel.setBounds(109, 99, 106, 33);
+        emailLabel.setForeground(new Color(255, 255, 255));
+        emailLabel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 12));
         emailField = new JTextField();
+        emailField.setBounds(109, 129, 246, 33);
         
-        JLabel departmentLabel = new JLabel("Department:");
+        JLabel departmentLabel = new JLabel("Department");
+        departmentLabel.setBounds(109, 172, 106, 33);
+        departmentLabel.setForeground(new Color(255, 255, 255));
+        departmentLabel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 12));
         String[] departments = {"IT", "HR", "Finance", "Operations"};
         departmentDropdown = new JComboBox<>(departments);
+        departmentDropdown.setBounds(109, 202, 246, 33);
 
         JButton addButton = new JButton("Add Employee");
+        addButton.setBounds(108, 265, 247, 33);
+        addButton.setForeground(new Color(255, 255, 255));
+        addButton.setFont(new Font("Bahnschrift", Font.BOLD, 16));
+        addButton.setBackground(new Color(27, 166, 221));
+        addButton.setFocusPainted(false);
+        addButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         addButton.addActionListener(e -> {
             String name = nameField.getText().trim();
@@ -75,14 +93,20 @@ public class AddEmployeeFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Employee added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         });
+        getContentPane().setLayout(null);
 
-        add(nameLabel);
-        add(nameField);
-        add(emailLabel);
-        add(emailField);
-        add(departmentLabel);
-        add(departmentDropdown);
-        add(new JLabel()); // Spacer
-        add(addButton);
+        getContentPane().add(nameLabel);
+        getContentPane().add(nameField);
+        getContentPane().add(emailLabel);
+        getContentPane().add(emailField);
+        getContentPane().add(departmentLabel);
+        getContentPane().add(departmentDropdown);
+        getContentPane().add(addButton);
+        
+        JSeparator separator = new JSeparator(SwingConstants.VERTICAL);
+        separator.setForeground(new Color(160, 160, 160));
+        separator.setBackground(new Color(43, 46, 68));
+        separator.setBounds(70, 31, 7, 290);
+        getContentPane().add(separator);
     }
 }
