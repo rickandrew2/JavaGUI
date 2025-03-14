@@ -38,7 +38,7 @@ public class AddEmployeeFrame extends JFrame {
         departmentLabel.setBounds(109, 172, 106, 33);
         departmentLabel.setForeground(new Color(255, 255, 255));
         departmentLabel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 12));
-        String[] departments = {"IT", "HR", "Finance", "Operations"};
+        String[] departments = {"Administration", "Creative Design", "Customer Success", "Data Science", "DevSecOps", "Development", "Marketing", "Product Management", "Quality Assurance", "Sales", "Security & Compliance"};
         departmentDropdown = new JComboBox<>(departments);
         departmentDropdown.setBounds(109, 202, 246, 33);
 
