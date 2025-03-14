@@ -15,25 +15,25 @@ public class LoginFrame extends JFrame {
         setSize(680, 434);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
+        
+        //------components and styling
         JLabel usernameLabel = new JLabel("Username");
         usernameLabel.setForeground(new Color(255, 255, 255));
         usernameLabel.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 12));
-        usernameLabel.setBounds(284, 118, 67, 55);
+        usernameLabel.setBounds(283, 132, 67, 55);
         usernameField = new JTextField();
-        usernameField.setBounds(285, 157, 328, 32);
+        usernameField.setBounds(284, 171, 328, 32);
         JLabel passwordLabel = new JLabel("Password");
         passwordLabel.setForeground(new Color(255, 255, 255));
         passwordLabel.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 12));
-        passwordLabel.setBounds(284, 183, 67, 55);
+        passwordLabel.setBounds(283, 197, 67, 55);
         passwordField = new JPasswordField();
-        passwordField.setBounds(285, 222, 328, 32);
+        passwordField.setBounds(284, 236, 328, 32);
         JButton loginButton = new JButton("LOGIN");
         loginButton.setForeground(new Color(255, 255, 255));
         loginButton.setFont(new Font("Bahnschrift", Font.BOLD, 16));
-        loginButton.setBounds(284, 293, 328, 55);
+        loginButton.setBounds(283, 301, 328, 55);
         loginButton.setBackground(new Color(27, 166, 221));
-        loginButton.setFocusPainted(false);
         loginButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         loginButton.addActionListener(e -> {
@@ -50,13 +50,10 @@ public class LoginFrame extends JFrame {
                 return;
             }
 
-            // 🔴 Auto-detect role based on credentials
             String role = validateCredentials(username, password);
 
             if (role != null) {
                 JOptionPane.showMessageDialog(this, "Welcome, " + username + "! You are logged in as " + role + ".");
-
-                // ✅ Open corresponding frame based on detected role
                 switch (role) {
                     case "Admin":
                         new AdminFrame().setVisible(true);
@@ -71,13 +68,12 @@ public class LoginFrame extends JFrame {
                         JOptionPane.showMessageDialog(this, "No frame assigned for this role yet.");
                         return;
                 }
-
-                // Close the login frame after successful login
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
+        
         getContentPane().setLayout(null);
 
         getContentPane().add(usernameLabel);
@@ -92,21 +88,29 @@ public class LoginFrame extends JFrame {
         getContentPane().add(lblNewLabel);
         
         JLabel lblNewLabel_1 = new JLabel("securiti");
-        lblNewLabel_1.setBounds(361, 62, 197, 66);
+        lblNewLabel_1.setBounds(283, 55, 197, 66);
         getContentPane().add(lblNewLabel_1);
         lblNewLabel_1.setForeground(new Color(27, 166, 221));
         lblNewLabel_1.setFont(new Font("Bahnschrift", Font.BOLD, 48));
+        
+        JLabel lblNewLabel_1_1 = new JLabel("Welcome");
+        lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
+        lblNewLabel_1_1.setFont(new Font("Bahnschrift", Font.ITALIC, 16));
+        lblNewLabel_1_1.setBounds(545, 74, 79, 43);
+        getContentPane().add(lblNewLabel_1_1);
+        
+        JSeparator separator = new JSeparator();
+        separator.setBackground(new Color(43, 46, 68));
+        separator.setBounds(283, 116, 329, 6);
+        getContentPane().add(separator);
     }
 
-    /**
-     * 🔹 Validates username & password and auto-detects role
-     * @return the role if valid, otherwise null
-     */
+    //-----login validation
     private String validateCredentials(String username, String password) {
         if (username.equals("admin") && password.equals("admin123")) return "Admin";
         if (username.equals("manager") && password.equals("manager123")) return "Manager";
         if (username.endsWith("@gmail.com") && password.equals("employee123")) return "Employee";
-        return null;  // Invalid credentials
+        return null;
     }
 
     public static void main(String[] args) {

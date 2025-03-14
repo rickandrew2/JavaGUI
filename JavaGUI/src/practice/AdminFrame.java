@@ -23,7 +23,7 @@ public class AdminFrame extends JFrame {
         setSize(750, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
+        getContentPane().setLayout(new BorderLayout());
 
         // Table Columns: ID, Name, Email, Department
         String[] columnNames = {"ID", "Name", "Email", "Department"};
@@ -31,7 +31,7 @@ public class AdminFrame extends JFrame {
         employeeTable = new JTable(tableModel);
         employeeTable.setDefaultEditor(Object.class, null); // Read-only
 
-        // 🔍 Search Field
+        //----search field
         searchField = new JTextField(15);
         searchField.addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent e) {
@@ -39,29 +39,65 @@ public class AdminFrame extends JFrame {
             }
         });
 
-        // 📂 Department Filter
+        //----dept filter
         String[] departments = {"All", "IT", "HR", "Finance", "Operations"};
         departmentFilter = new JComboBox<>(departments);
         departmentFilter.addActionListener(e -> filterEmployees());
 
-        // 🔽 Sorting Options
+        //----sorting options
         String[] sortingOptions = {"Sort by Name", "Sort by Department"};
         sortOptions = new JComboBox<>(sortingOptions);
         sortOptions.addActionListener(e -> filterEmployees());
 
-        // 🛠 Buttons
+        //---buttons
         JButton addEmployeeButton = new JButton("Add Employee");
         JButton updateEmployeeButton = new JButton("Update Employee");
         JButton deleteEmployeeButton = new JButton("Delete Employee");
         JButton auditLogsButton = new JButton("View Audit Logs");
-        JButton logoutButton = new JButton("Logout"); // 🚀 Logout button added
+        JButton logoutButton = new JButton("Logout"); 
+        logoutButton.setForeground(new Color(255, 255, 255));
+        logoutButton.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 10));
+        logoutButton.setBorderPainted(false);
+        logoutButton.setBackground(new Color(165, 42, 42));
+        
+        //----add button styling
+        addEmployeeButton.setForeground(new Color(255, 255, 255));
+        addEmployeeButton.setFont(new Font("Bahnschrift", Font.BOLD, 16));
+        addEmployeeButton.setBackground(new Color(27, 166, 221));
+        addEmployeeButton.setFocusPainted(false);
+        addEmployeeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+        //----update button styling
+        updateEmployeeButton.setForeground(new Color(255, 255, 255));
+        updateEmployeeButton.setFont(new Font("Bahnschrift", Font.BOLD, 16));
+        updateEmployeeButton.setBackground(new Color(27, 166, 221));
+        updateEmployeeButton.setFocusPainted(false);
+        updateEmployeeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        //----delete button styling
+        deleteEmployeeButton.setForeground(new Color(255, 255, 255));
+        deleteEmployeeButton.setFont(new Font("Bahnschrift", Font.BOLD, 16));
+        deleteEmployeeButton.setBackground(new Color(27, 166, 221));
+        deleteEmployeeButton.setFocusPainted(false);
+        deleteEmployeeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        //----audit logs button styling
+        auditLogsButton.setForeground(new Color(255, 255, 255));
+        auditLogsButton.setFont(new Font("Bahnschrift", Font.BOLD, 16));
+        auditLogsButton.setBackground(new Color(27, 166, 221));
+        auditLogsButton.setFocusPainted(false);
+        auditLogsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        //logout button
+        logoutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        //---button actions
         addEmployeeButton.addActionListener(e -> new AddEmployeeFrame(this).setVisible(true));
         updateEmployeeButton.addActionListener(e -> updateEmployee());
         deleteEmployeeButton.addActionListener(e -> deleteEmployee());
         auditLogsButton.addActionListener(e -> new AuditLogFrame().setVisible(true));
 
-        // 🚀 Logout button action
+        //---logout button action
         logoutButton.addActionListener(e -> {
             int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
             if (choice == JOptionPane.YES_OPTION) {
@@ -70,32 +106,43 @@ public class AdminFrame extends JFrame {
             }
         });
 
-        // 🔍 Search & Filter Panel
+        //-----search & filter
         JPanel filterPanel = new JPanel();
-        filterPanel.add(new JLabel("Search:"));
+        filterPanel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
+        filterPanel.setBackground(new Color(31, 34, 40));
+        JLabel label = new JLabel("Search:");
+        label.setForeground(new Color(255, 255, 255));
+        filterPanel.add(label);
         filterPanel.add(searchField);
-        filterPanel.add(new JLabel("Filter by Department:"));
+        JLabel label_1 = new JLabel("Filter by Department:");
+        label_1.setForeground(new Color(255, 255, 255));
+        filterPanel.add(label_1);
         filterPanel.add(departmentFilter);
-        filterPanel.add(new JLabel("Sort:"));
+        JLabel label_2 = new JLabel("Sort:");
+        label_2.setForeground(new Color(255, 255, 255));
+        filterPanel.add(label_2);
         filterPanel.add(sortOptions);
 
-        // 🔘 Button Panel
+        //----button panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(addEmployeeButton);
         buttonPanel.add(updateEmployeeButton);
         buttonPanel.add(deleteEmployeeButton);
         buttonPanel.add(auditLogsButton);
-        buttonPanel.add(logoutButton); // 🚀 Add logout button here
+        buttonPanel.add(logoutButton);
 
-        add(filterPanel, BorderLayout.NORTH);
-        add(new JScrollPane(employeeTable), BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        getContentPane().add(filterPanel, BorderLayout.NORTH);
+        JScrollPane scrollPane = new JScrollPane(employeeTable);
+        scrollPane.setForeground(new Color(255, 255, 255));
+        scrollPane.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 10));
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
+        getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
         refreshEmployeeList();
     }
 
     public static boolean addEmployee(Employee emp) {
-        // Check for duplicates
+        //----check for duplicates
         for (Employee existingEmp : employeeList) {
             if (existingEmp.getName().equalsIgnoreCase(emp.getName())) {
                 JOptionPane.showMessageDialog(null, "Employee name already exists!", "Error", JOptionPane.ERROR_MESSAGE);
